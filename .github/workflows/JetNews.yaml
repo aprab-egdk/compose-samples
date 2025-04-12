@@ -20,7 +20,7 @@ env:
   compose_key_password: ${{ secrets.compose_key_password }}
 jobs:
   build:
-    uses: ./.github/workflows/build-sample.yml
+    uses: ./.github/workflows/compose_screenshot_test.yml
     with:
       name: JetNews
       path: JetNews

@@ -1,4 +1,4 @@
-name: Build and Test Sample
+name: Run screenshot tests against the pre records
 
 on:
   workflow_call:
@@ -31,7 +31,7 @@ env:
   compose_key_password: ${{ secrets.compose_key_password }}
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     timeout-minutes: 30
     steps:
       - name: Checkout
@@ -56,14 +56,15 @@ jobs:
             ~/.gradle/caches/jars-*
             ~/.gradle/caches/build-cache-*
           key: gradle-${{ hashFiles('checksum.txt') }}
-
-      - name: Build debug
+            
+      - name: Run Screenshot Tests
         working-directory: ${{ inputs.path }}
-        run: ./gradlew app:app:validateDebugScreenshotTest --stacktrace
+        run: ./gradlew validateDebugScreenshotTest --stacktrace
 
       - name: Upload build reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: build-reports
-          path: ${{ inputs.path }}/${{ inputs.module }}/build/reports
+          path: ${{ inputs.path }}/${{ inputs.module }}/build/reports/screenshotTest/preview/debug/index.html
+          reporter: jest-junit
