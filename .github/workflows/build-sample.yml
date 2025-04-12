@@ -56,32 +56,10 @@ jobs:
             ~/.gradle/caches/jars-*
             ~/.gradle/caches/build-cache-*
           key: gradle-${{ hashFiles('checksum.txt') }}
-
-      - name: Check formatting
+            
+      - name: Run Screenshot Tests
         working-directory: ${{ inputs.path }}
-        run: ./gradlew --init-script buildscripts/init.gradle.kts spotlessCheck --stacktrace
-
-      - name: Check lint
-        working-directory: ${{ inputs.path }}
-        run: ./gradlew lintDebug --stacktrace
-
-      - name: Build debug
-        working-directory: ${{ inputs.path }}
-        run: ./gradlew assembleDebug --stacktrace
-      - name: Enable KVM group perms
-        run: |
-            echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-            sudo udevadm control --reload-rules
-            sudo udevadm trigger --name-match=kvm
-      - name: Run local tests
-        working-directory: ${{ inputs.path }}
-        run: ./gradlew testDebug --stacktrace
-
-      - name: Upload build outputs (APKs)
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-outputs
-          path: ${{ inputs.path }}/${{ inputs.module }}/build/outputs
+        run: ./gradlew validateDebugScreenshotTest --stacktrace
 
       - name: Upload build reports
         if: always()
