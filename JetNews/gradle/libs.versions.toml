@@ -57,6 +57,9 @@ secrets = "2.0.1"
 targetSdk = "33"
 version-catalog-update = "0.8.5"
 
+# Screenshot Testing
+screenshot = "0.0.1-alpha07"
+
 [libraries]
 accompanist-adaptive = { module = "com.google.accompanist:accompanist-adaptive", version.ref = "accompanist" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
@@ -172,3 +175,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}
+
